@@ -16,9 +16,13 @@ export const AuthContextProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth, email, password)
     };
 
+    const signIn = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password)
+    };
+
     const logout = () => {
         return signOut(auth);
-    }
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -31,7 +35,7 @@ export const AuthContextProvider = ({children}) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ createUser, user, logout }}>
+        <UserContext.Provider value={{ createUser, user, logout, signIn }}>
             {children}
         </UserContext.Provider>
     );
